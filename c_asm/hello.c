@@ -1,7 +1,8 @@
-extern int _say_hello(void);
+// Declare our assembly function
+extern int say_hello(void);
 
 int main(void)
 {
-    _say_hello();
-    return 0;
+    // Call it!
+    return say_hello();
 }

@@ -1,15 +1,17 @@
-global _say_hello
+global say_hello
 section .text
 
-_say_hello:
-    mov     eax, 4
-    mov     ebx, 1
-    mov     edx, _len
-    mov     ecx, _msg
-    int     0x80 
+; int say_hello(void)
+say_hello:
+    mov     eax, 4                  ; set eax = SYS_write
+    mov     ebx, 1                  ; set ebx = stdout
+    mov     edx, _len               ; edx = len
+    mov     ecx, _msg               ; ecx = pointer to msg
+    int     0x80                    ; write(1, _msg, _len)
     
-    xor     eax, eax
-    ret
+    mov     eax, 1                  ; set eax = SYS_exit
+    xor     ebx, ebx                ; set exit() value to 0
+    int     0x80                    ; exit(0)
 
-_msg db "Hello, Assembly!", 10
-_len equ $ - _msg 
+_msg db "Hello, Assembly!", 10      ; Note the newline at the end
+_len equ $ - _msg                   ; Length of msg
