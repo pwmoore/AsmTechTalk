@@ -107,7 +107,7 @@ void get_string(uc_engine *uc, uint64_t address, char *dst, size_t dst_size)
         
         uc_err err = uc_mem_read(uc, cur_addr, &ch, 1);
         if (err != UC_ERR_OK) {
-            printf("Couldn't read string at 0x%lx\n", cur_addr);
+            printf("Couldn't read string at 0x%llx\n", cur_addr);
             exit(err);
         }
 
@@ -196,7 +196,7 @@ void emulate_chmod(uc_engine *uc, x86_register_state *regs)
     char file[PATH_MAX + 1] = {0};
     syscall_args *args = (syscall_args *)regs;
     get_string(uc, args->arg0, file, sizeof(file));
-    printf("0x%x: chmod(\"%s\", %o)\n", regs->eip, file, args->arg1);
+    printf("0x%x: chmod(\"%s\", 0%o)\n", regs->eip, file, args->arg1);
     regs->eax = 0;
     set_register_state(uc, regs);
 }
@@ -374,7 +374,7 @@ void dump_shellcode(char *sc, size_t sc_size)
     size_t count = cs_disasm(cs_handle, (const uint8_t *)sc, sc_size, ADDRESS, 0, &insn);
     if (count) {
         for (size_t i = 0; i < count; ++i) {
-            printf("0x%lx:\t%s\t%s\n", insn[i].address, insn[i].mnemonic, insn[i].op_str);
+            printf("0x%llx:\t%s\t%s\n", insn[i].address, insn[i].mnemonic, insn[i].op_str);
         }
     }
 }

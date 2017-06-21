@@ -82,11 +82,11 @@ int main(void)
     cs_insn *insn = NULL;
 
     // Disassemble the code to make sure it's what we expect
-    count = cs_disasm(cs_handle, (uint8_t *)executable_code, code_size, (uint64_t)executable_code, 0, &insn);
+    count = cs_disasm(cs_handle, (uint8_t *)executable_code, code_size, (uintptr_t)executable_code, 0, &insn);
 
     if (count) {
         for (size_t i = 0; i < count; ++i) {
-            printf("0x%lx:\t%s\t%s\n", insn[i].address,insn[i].mnemonic, insn[i].op_str);
+            printf("0x%llx:\t%s\t%s\n", insn[i].address,insn[i].mnemonic, insn[i].op_str);
         }
     }
 
@@ -96,7 +96,7 @@ int main(void)
         return -1;
     }
 
-    // Do itc!
+    // Do it!
     func_t go = (func_t)executable_code;
     long ret = go();
     printf("JIT returned %ld\n", ret);
