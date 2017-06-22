@@ -83,14 +83,6 @@ void set_register_state(uc_engine *uc, x86_register_state *regs)
     uc_reg_write(uc, UC_X86_REG_EBP, &regs->ebp);    
     uc_reg_write(uc, UC_X86_REG_ESP, &regs->esp);    
     uc_reg_write(uc, UC_X86_REG_EIP, &regs->eip);    
-
-}
-
-void emulate_exit(uc_engine *uc, x86_register_state *regs)
-{
-    syscall_args *args = (syscall_args *)regs;
-    printf("0x%x: exit(%d)\n", regs->eip, args->arg0);
-    uc_emu_stop(uc);
 }
 
 void get_string(uc_engine *uc, uint64_t address, char *dst, size_t dst_size)
@@ -122,6 +114,29 @@ void get_string(uc_engine *uc, uint64_t address, char *dst, size_t dst_size)
     }
 }
 
+void print_data(char *data, size_t data_size, size_t max_size)
+{
+    size_t to_print = MIN(data_size, max_size);
+    for (size_t i = 0; i < to_print; ++i) {
+        if (isprint(data[i])) {
+            printf("%c", data[i]);
+        } else {
+            printf("\\x%x", data[i]);
+        }
+    }
+
+    if (data_size > max_size) {
+        printf("...");
+    }
+}
+
+void emulate_exit(uc_engine *uc, x86_register_state *regs)
+{
+    syscall_args *args = (syscall_args *)regs;
+    printf("0x%x: exit(%d)\n", regs->eip, args->arg0);
+    uc_emu_stop(uc);
+}
+
 static int next_fd = 3;
 void emulate_open(uc_engine *uc, x86_register_state *regs)
 {
@@ -149,22 +164,6 @@ void emulate_generic(uc_engine *uc, x86_register_state *regs)
     set_register_state(uc, regs);
 }
 
-void print_data(char *data, size_t data_size, size_t max_size)
-{
-    size_t to_print = MIN(data_size, max_size);
-    for (size_t i = 0; i < to_print; ++i) {
-        if (isprint(data[i])) {
-            printf("%c", data[i]);
-        } else {
-            printf("\\x%x", data[i]);
-        }
-    }
-
-    if (data_size > max_size) {
-        printf("...");
-    }
-}
-
 void emulate_write(uc_engine *uc, x86_register_state *regs)
 {
     syscall_args *args = (syscall_args *)regs;
@@ -183,14 +182,6 @@ void emulate_write(uc_engine *uc, x86_register_state *regs)
     set_register_state(uc, regs);
 }
 
-void emulate_read(uc_engine *uc, x86_register_state *regs)
-{
-    syscall_args *args = (syscall_args *)regs;
-    printf("0x%x: read(%d, 0x%x, %d)\n", regs->eip, args->arg0, args->arg1, args->arg2);
-    regs->eax = args->arg2;
-    set_register_state(uc, regs);
-}
-
 void emulate_chmod(uc_engine *uc, x86_register_state *regs)
 {
     char file[PATH_MAX + 1] = {0};
@@ -200,7 +191,6 @@ void emulate_chmod(uc_engine *uc, x86_register_state *regs)
     regs->eax = 0;
     set_register_state(uc, regs);
 }
-
 
 void emulate_execve(uc_engine *uc, x86_register_state *regs)
 {
