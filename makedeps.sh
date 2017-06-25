@@ -5,7 +5,7 @@ then
 fi
 
 sudo apt update
-sudo apt install -y build-essential nasm cmake
+sudo apt install -y build-essential nasm cmake libreadline-dev
 git submodule update --init --recursive
 cd capstone
 ./make.sh
