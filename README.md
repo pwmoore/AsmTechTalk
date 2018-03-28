@@ -1,7 +1,6 @@
 # AsmTechTalk
 
-This repository contains sample code for a tech talk given at Hell 'n' Blazes for HackSpaceCoast. 
-The slides can be found [here](https://docs.google.com/presentation/d/1PT6LuScUeznCtYjkIstt0r1DB-YlNbCP_wGFlYiku04/edit?usp=sharing).
+This repository contains sample code for a tech talk given at Hell 'n' Blazes for HackSpaceCoast.
 
 # Environment
 
