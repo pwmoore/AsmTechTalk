@@ -13,7 +13,7 @@ and 32-bit libraries installed.
 
 ## VM Setup
 
-Download the Ubuntu 16.04.2 32-bit ISO [here](http://releases.ubuntu.com/16.04/ubuntu-16.04.2-desktop-i386.iso). A guide for installing Ubuntu with Virtualbox on Windows can be found [here](https://www.lifewire.com/run-ubuntu-within-windows-virtualbox-2202098). Instructions should work similarly on Virtualbox for macOS. 
+Download the Ubuntu 16.04.5 32-bit ISO [here](http://releases.ubuntu.com/16.04/ubuntu-16.04.5-desktop-i386.iso). A guide for installing Ubuntu with Virtualbox on Windows can be found [here](https://www.lifewire.com/run-ubuntu-within-windows-virtualbox-2202098). Instructions should work similarly on Virtualbox for macOS. 
 
 Once the VM is installed, log in and perform the following command: 
 
