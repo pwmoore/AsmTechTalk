@@ -20,7 +20,7 @@ Once the VM is installed, log in and perform the following command:
 ```
 sudo apt update
 sudo apt upgrade
-sudo apt install git
+sudo apt install git make
 git clone https://www.github.com/pwmoore/AsmTechTalk.git
 ```
 
