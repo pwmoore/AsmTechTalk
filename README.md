@@ -4,7 +4,7 @@ This repository contains sample code for a tech talk given at Hell 'n' Blazes fo
 
 # Environment
 
-The code here should be fairly generic and work on any Linux based OS. I used a 32-bit Ubuntu 16.04.2 VM. 64-bit should be fine with gcc-multilib
+The code here should be fairly generic and work on any Linux based OS. I used a 32-bit Ubuntu 16.04.6 VM. 64-bit should be fine with gcc-multilib
 and 32-bit libraries installed.
 
 ## VM Software
@@ -13,18 +13,16 @@ and 32-bit libraries installed.
 
 ## VM Setup
 
-Download the Ubuntu 16.04.5 32-bit ISO [here](http://releases.ubuntu.com/16.04/ubuntu-16.04.5-desktop-i386.iso). A guide for installing Ubuntu with Virtualbox on Windows can be found [here](https://www.lifewire.com/run-ubuntu-within-windows-virtualbox-2202098). Instructions should work similarly on Virtualbox for macOS. 
+Download the Ubuntu 16.04.6 32-bit ISO [here](http://releases.ubuntu.com/16.04/ubuntu-16.04.6-desktop-i386.iso). A guide for installing Ubuntu with Virtualbox on Windows can be found [here](https://www.lifewire.com/run-ubuntu-within-windows-virtualbox-2202098). Instructions should work similarly on Virtualbox for macOS. 
 
 Once the VM is installed, log in and perform the following command: 
 
 ```
-sudo apt update
-sudo apt upgrade
-sudo apt install git make
+sudo apt update && sudo apt upgrade && sudo apt install git
 git clone https://www.github.com/pwmoore/AsmTechTalk.git
 ```
 
-## Installing Dependencies
+## Installing Dependencies and Building
 Once the clone is complete, do the following:
 
 ```
